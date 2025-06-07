@@ -1,0 +1,637 @@
+/* === GENERAL STYLES === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  cursor: default;
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== HEADER STYLES ===== */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #2c3e50;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.logo i {
+  font-size: 1.8rem;
+  color: #3498db;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.email-reminder-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.toggle-label {
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+/* Toggle Switch Styles */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked+.slider {
+  background-color: #3498db;
+}
+
+input:checked+.slider:before {
+  transform: translateX(26px);
+}
+
+/* Button Styles */
+.header-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.3s;
+}
+
+.header-btn:not(.delete) {
+  background-color: #3498db;
+  color: white;
+}
+
+.header-btn.delete {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.header-btn:hover:not(.delete) {
+  background-color: #2980b9;
+}
+
+.header-btn.delete:hover {
+  background-color: #c0392b;
+}
+
+/* Responsive Header Adjustments */
+@media (max-width: 768px) {
+  .dashboard-header {
+    padding: 1rem;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .header-right {
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+
+  .email-reminder-toggle {
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-right {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+  }
+
+  .email-reminder-toggle {
+    margin-right: 0;
+    align-self: flex-end;
+  }
+}
+
+/* === MAIN CONTENT STYLES === */
+.dashboard-main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+h1 {
+  color: #444;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+section h2 {
+  text-align: center;
+  margin: 1.5rem 0 1rem;
+  color: #2c3e50;
+  font-size: 1.5rem;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+section h2::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: #3498db;
+  margin: 0.5rem auto 0;
+  border-radius: 3px;
+}
+
+/* === FORM STYLING === */
+form {
+  background-color: #fff;
+  padding: 20px;
+  margin: 20px auto;
+  text-align: center;
+  width: 320px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+}
+
+input,
+select {
+  display: block;
+  width: 90%;
+  padding: 10px;
+  margin: 12px auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* === BUTTONS === */
+button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  margin-top: 10px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+.delete-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}
+
+/* === TOGGLE BUTTONS === */
+.toggle-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+  gap: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.toggle-button {
+  padding: 10px 20px;
+  font-weight: bold;
+  border: none;
+  background-color: #797979;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-button.active {
+  background-color: #3498db;
+  color: white;
+}
+
+/* === TASK LIST === */
+#taskList {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.task-item {
+  background-color: #fff;
+  padding: 12px;
+  width: 320px;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Emplty message */
+.empty-message {
+  text-align: center;
+  color: #555;
+  font-size: 1.1rem;
+  margin-top: 2rem;
+  line-height: 1.6;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+/* === TASK CARDS === */
+.task-item {
+  border: 2px solid #ccc;
+  border-radius: 16px;
+  padding: 1rem;
+  width: 320px;
+  background: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  text-align: left;
+  margin: 1rem auto;
+  transition: transform 0.2s ease;
+}
+
+.task-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.task-item h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.task-item p {
+  margin: 0.3rem 0;
+  word-break: break-word;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.task-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  gap: 0.5rem;
+}
+
+.task-buttons button {
+  padding: 8px 12px;
+  background-color: #3498db;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  flex: 1;
+}
+
+.task-buttons button:hover {
+  background-color: #2980b9;
+}
+
+.task-buttons button:last-child {
+  background-color: #e74c3c;
+}
+
+.task-buttons button:last-child:hover {
+  background-color: #c0392b;
+}
+
+.complete-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 0.8rem;
+  padding: 8px 12px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.complete-container:hover {
+  background-color: #e9ecef;
+}
+
+.complete-label {
+  font-size: 0.95rem;
+  color: #495057;
+  cursor: pointer;
+  margin: 0;
+}
+
+.task-checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  margin: 0;
+  accent-color: #2980b9;
+}
+
+/* === HABIT CARDS === */
+.habit-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.habit-card {
+  border: 2px solid #ccc;
+  border-radius: 16px;
+  padding: 1rem;
+  width: 320px;
+  margin: 0 auto;
+  background: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  text-align: left;
+  transition: transform 0.2s ease;
+}
+
+.habit-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.habit-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.habit-card p {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.habit-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  gap: 0.5rem;
+}
+
+.habit-buttons button {
+  padding: 8px 12px;
+  background-color: #3498db;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  flex: 1;
+}
+
+.habit-buttons button:hover {
+  background-color: #2980b9;
+}
+
+.habit-buttons button:last-child {
+  background-color: #e74c3c;
+}
+
+.habit-buttons button:last-child:hover {
+  background-color: #c0392b;
+}
+
+/* === MODAL STYLES === */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal input {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+}
+
+.modal button {
+  margin-right: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.modal select {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+/* === FOOTER STYLES === */
+.dashboard-footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #2c3e50;
+  color: white;
+  margin-top: auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* === RESPONSIVE LAYOUT === */
+@media (max-width: 480px) {
+  body {
+    margin: 0;
+  }
+
+  .dashboard-main {
+    padding: 1rem;
+  }
+
+  form,
+  .task-card,
+  .habit-card {
+    width: 90% !important;
+    margin: 1rem auto;
+  }
+
+  .task-buttons,
+  .habit-buttons {
+    flex-direction: column;
+  }
+
+  .task-buttons button,
+  .habit-buttons button {
+    width: 100%;
+  }
+
+  .toggle-container {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .modal {
+    padding: 1.5rem;
+  }
+
+  .header-btn {
+    font-size: 0.75rem;
+    padding: 6px 10px;
+  }
+}
+
+/* === INDEX.HTML === */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.main-content h1 {
+  font-size: 2.5rem;
+  color: #3498db;
+  margin-bottom: 1rem;
+}
+
+.main-content p {
+  font-size: 1.1rem;
+  color: #555;
+  max-width: 600px;
+  margin-bottom: 2rem;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.auth-buttons a {
+  text-decoration: none;
+  background-color: #2980b9;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.auth-buttons a:hover {
+  background-color: #1a4d6e;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 480px) {
+  .main-content h1 {
+    font-size: 2rem;
+  }
+
+  .auth-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+/* Login response*/
+#loginResponse {
+  text-align: center;
+  margin: 20px auto;
+  width: 100%;
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trackify - Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+  <!-- Header Section -->
+  <header class="dashboard-header">
+    <div class="logo">
+      <i class="fas fa-tasks"></i>
+      <span>Trackify</span>
+    </div>
+
+    <div class="header-right">
+      <div class="email-reminder-toggle">
+        <label class="toggle-label">Email Reminders</label>
+        <label class="switch">
+          <input type="checkbox" id="email-toggle" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <button id="logoutBtn" class="header-btn">Logout</button>
+      <button id="deleteAccountBtn" class="header-btn delete">Delete Account</button>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    <h1>📋 Your Dashboard</h1>
+
+    <div id="dashboard-toggle" class="toggle-container">
+      <button id="toggle-task" class="toggle-button active">Tasks</button>
+      <button id="toggle-habit" class="toggle-button">Habits</button>
+    </div>
+
+    <!-- Forms -->
+    <form id="task-form" class="form-section">
+      <input type="text" id="title" placeholder="Task title" required />
+      <input type="datetime-local" id="deadlineInput" required />
+      <button type="submit">Add Task</button>
+    </form>
+
+    <form id="habit-form" class="form-section" style="display: none;">
+      <input type="text" id="habit-name" placeholder="Enter habit name" required />
+
+      <input type="time" id="habit-time" required />
+
+      <select id="habit-frequency" required>
+        <option value="" disabled selected>Select frequency</option>
+        <option value="daily">Daily</option>
+        <option value="every 2 days">Every 2 Days</option>
+        <option value="every 3 days">Every 3 Days</option>
+        <option value="weekly">Weekly</option>
+        <option value="monthly">Monthly</option>
+      </select>
+
+      <button type="submit">Add Habit</button>
+    </form>
+
+    <section>
+      <h2>Your Tasks</h2>
+      <div id="taskList"></div>
+    </section>
+
+    <section>
+      <h2>Your Habits</h2>
+      <div id="habit-list" class="habit-list"></div>
+    </section>
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="dashboard-footer">
+    <p>Created by Aashish Choudhary | Student at IU</p>
+  </footer>
+
+  <script src="/js/dashboard.js" type="module" defer></script>
+</body>
+
+</html>
