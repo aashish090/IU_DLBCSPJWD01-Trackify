@@ -3,6 +3,8 @@
 **Trackify** is a personal task and habit tracking web application built using **Node.js**, **Express**, **MongoDB**, and **Vanilla JS**.  
 It allows users to register, log in, manage daily tasks and habits, and receive email reminders.
 
+![Dashboard Screenshot](Screenshots/dashboard-dekstop.png)
+
 ---
 
 ## 🚀 Features
