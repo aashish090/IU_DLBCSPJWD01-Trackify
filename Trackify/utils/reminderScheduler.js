@@ -34,6 +34,7 @@ cron.schedule("* * * * *", async () => {
     const tasksDueSoon = await Task.find({
       dueDate: { $gte: now, $lte: oneHourLater },
       reminderSent: false,
+      completed: false,
     }).populate("userId");
 
     for (const task of tasksDueSoon) {
@@ -56,8 +57,7 @@ cron.schedule("* * * * *", async () => {
 
         await sendEmailReminder(
           user.email,
-          `⏰ Task "${task.title}" is due in ${
-            timeString || "less than a minute"
+          `⏰ Task "${task.title}" is due in ${timeString || "less than a minute"
           }.`
         );
         task.reminderSent = true;
@@ -89,8 +89,16 @@ cron.schedule("* * * * *", async () => {
         // Calculate time until habit
         const timeUntilHabit = habitTimeToday - currentIST;
 
+        const lastCompleted = habit.lastCompleted
+        const completedToday =
+          lastCompleted &&
+          lastCompleted.getDate() === currentIST.getDate() &&
+          lastCompleted.getMonth() === currentIST.getMonth() &&
+          lastCompleted.getFullYear() === currentIST.getFullYear();
+
         if (
           !sameDay &&
+          !completedToday &&
           timeUntilHabit > 0 &&
           timeUntilHabit <= 60 * 60 * 1000
         ) {
@@ -103,20 +111,17 @@ cron.schedule("* * * * *", async () => {
 
           let habitTimeString = "";
           if (habitHoursRemaining > 0)
-            habitTimeString += `${habitHoursRemaining} hour${
-              habitHoursRemaining !== 1 ? "s" : ""
-            }`;
+            habitTimeString += `${habitHoursRemaining} hour${habitHoursRemaining !== 1 ? "s" : ""
+              }`;
           if (habitMinutesRemaining > 0) {
             if (habitHoursRemaining > 0) habitTimeString += " and ";
-            habitTimeString += `${habitMinutesRemaining} minute${
-              habitMinutesRemaining !== 1 ? "s" : ""
-            }`;
+            habitTimeString += `${habitMinutesRemaining} minute${habitMinutesRemaining !== 1 ? "s" : ""
+              }`;
           }
 
           await sendEmailReminder(
             user.email,
-            `🌿 Habit "${habit.title}" is scheduled in ${
-              habitTimeString || "less than a minute"
+            `🌿 Habit "${habit.title}" is scheduled in ${habitTimeString || "less than a minute"
             }.`
           );
 
