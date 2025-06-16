@@ -30,7 +30,7 @@ It allows users to register, log in, manage daily tasks and habits, and receive 
 
 ## 🔐 Environment Variables
 
-You must create a `.env` file in the `/Trackify` directory based on `.env.example`.
+You must create a `.env` file in the `/Trackify` directory based on `.env.example` and follow all the steps mentioned in the file to overwrite it with actual data. 
 
 ---
 
@@ -41,14 +41,14 @@ You must create a `.env` file in the `/Trackify` directory based on `.env.exampl
     git clone https://github.com/aashish090/IU_DLBCSPJWD01-Trackify.git
     ```
 
-2. Navigate to the project folder:
-    ```bash
-    cd IU_DLBCSPJWD01/Trackify
-    ```
-
-3. Install dependencies:
+2. Install dependencies:
     ```bash
     npm install
+    ```
+
+3. Navigate to the project folder:
+    ```bash
+    cd Trackify
     ```
 
 4. Create your `.env` file:
